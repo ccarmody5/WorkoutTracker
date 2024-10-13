@@ -27,8 +27,32 @@ position: absolute;
     left: 0;
     top: 0;
 }
+
 #currentTime{
 position: absolute;
     right: 0;
     top: 0;
+}
+
+.btnActivityContainer{
+    display: flex;
+    justify-content: center; /* Align items horizontally centered */
+    flex-wrap: wrap; /* Enable wrapping of items */
+    gap: 10px; /* Optional: Add space between buttons */
+    padding: 50px; /* Optional: Add padding to the container */
+    }
+
+.btnActivity{
+    font-size: 30px;
+    border-radius: 12px;
+    flex: 1 1 auto; /* Allow buttons to grow and shrink as necessary */
+    width: 250px;
+    max-width: 250px;
+    height: 100px;
+    background-color: #DADBDD;
+}
+
+.btnActivity:hover {
+  background-color: #04AA6D; /* Green */
+  color: white;
 }

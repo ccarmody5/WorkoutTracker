@@ -45,10 +45,6 @@ class User(Base, TableNameMixin, CreateUpdateMixin):
     user_id: Mapped[int_pk]
     first_name: Mapped[str_2000]
     last_name: Mapped[str_2000]
-    # username: Mapped[str_2000] = mapped_column(VARCHAR)
-    # birthdate: Mapped[datetime] = mapped_column(
-    #    TIMESTAMP, nullable=False
-    # )
     disabled: Mapped[str] = mapped_column(VARCHAR(1), server_default='N')
 
 
@@ -57,6 +53,11 @@ class Activity(Base, TableNameMixin, CreateUpdateMixin):
     activity_desc: Mapped[str_2000]
     disabled: Mapped[str] = mapped_column(VARCHAR(1), server_default='N')
 
+    def to_dict(self):
+        return {
+            'activity_id': self.activity_id,
+            'activity_desc': self.activity_desc
+        }
 
 class Workout(Base, TableNameMixin, CreateUpdateMixin):
     workout_id: Mapped[int_pk]
@@ -67,6 +68,14 @@ class Workout(Base, TableNameMixin, CreateUpdateMixin):
     end_time: Mapped[datetime] = mapped_column(
         TIMESTAMP, nullable=True)
 
+    def to_dict(self):
+        return {
+            'workout_id': self.workout_id,
+            'activity_id': self.activity_id,
+            'user_id': self.user_id,
+            'start_time': self.start_time,
+            'end_time': self.end_time
+        }
 
 class WorkoutDetail(Base, TableNameMixin, CreateUpdateMixin):
     workout_detail_id: Mapped[int_pk]
@@ -77,3 +86,13 @@ class WorkoutDetail(Base, TableNameMixin, CreateUpdateMixin):
         TIMESTAMP, nullable=True)
     end_time: Mapped[datetime] = mapped_column(
         TIMESTAMP, nullable=True)
+
+    def to_dict(self):
+        return {
+            'workout_detail_id': self.workout_detail_id,
+            'workout_id': self.workout_id,
+            'rep_count': self.rep_count,
+            'weight': self.weight,
+            'start_time': self.start_time,
+            'end_time': self.end_time
+        }

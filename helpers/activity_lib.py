@@ -1,3 +1,5 @@
+from typing import Sequence
+
 from sqlalchemy import insert, select, func, update
 from sqlalchemy.orm import Session
 
@@ -103,7 +105,7 @@ class ActivityLib:
         finally:
             self.session.close()
 
-    def get_all_activities(self, include_disabled: str = 'N'):
+    def get_all_activities(self, include_disabled: str = 'N') -> Sequence[Activity]:
         logger.info(f"getting all activities")
 
         if include_disabled == 'Y':
