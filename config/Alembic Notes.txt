@@ -1,0 +1,13 @@
+Requirements
+* Update
+    - pip freeze > requirements.txt
+* Install
+    - pip install -r requirements.txt
+
+Alembic
+* Revisions
+    - alembic revision --autogenerate -m "<REVISION NOTES>"
+* Install updates
+    - alembic upgrade head
+* Downgrade
+    - alembic downgrade -1
