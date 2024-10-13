@@ -6,9 +6,10 @@
 """
 import sys
 
-import config.db_log_config as log_config
 from environs import Env
 from sqlalchemy import create_engine, URL
+
+import config.db_log_config as log_config
 
 logger = log_config.db_logger
 

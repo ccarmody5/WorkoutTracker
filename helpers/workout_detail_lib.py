@@ -1,10 +1,10 @@
 from datetime import datetime
 
-import config.db_log_config as log_config
-from config.db_table_config import WorkoutDetail
 from sqlalchemy import insert, select, update
 from sqlalchemy.orm import Session
 
+import config.db_log_config as log_config
+from config.db_table_config import WorkoutDetail
 
 logger = log_config.db_logger
 

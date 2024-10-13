@@ -7,6 +7,7 @@
 ' will accept workout activities and record them in the database
 '
 """
+import sys
 
 from sqlalchemy.orm import sessionmaker
 
@@ -19,7 +20,7 @@ import helpers.workout_lib as workout_lib
 
 logger = log_config.app_logger
 
-logger.info("\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX main.py has started XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+logger.info("\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX terminal_program.py has started XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
 
 # Create DB Engine
 engine = db_helper.create_db_engine()
@@ -326,8 +327,13 @@ def login():
 
     for user in user_list:
         print(f"{user.user_id} - {user.first_name} {user.last_name}")
+    print(f"Q - Quit")
 
     user_selected = input()
+
+    if user_selected.lower() == "q":
+        print("Shutting down")
+        sys.exit(0)
 
     if user_selected not in [str(user.user_id) for user in user_list]:
         print("Invalid menu choice")
@@ -351,7 +357,8 @@ def get_menu():
     menu_list = ["1 - Start Activity",
                  "2 - Manage Activities",
                  "3 - Manage Users",
-                 "4 - Logout"]
+                 "4 - Logout",
+                 "Q - Quit"]
 
     print("\nChoose an option from the menu below:")
 
@@ -373,6 +380,9 @@ def get_menu():
         logout()
     elif menu_choice == "4" and active_user == 0:
         login()
+    elif menu_choice.lower() == "q":
+        print(f"Shutting down")
+        sys.exit(0)
     else:
         print("Invalid menu choice")
 

@@ -1,10 +1,11 @@
 from logging.config import fileConfig
 
-import config.db_table_config as tables
 from alembic import context
 from environs import Env
 from sqlalchemy import engine_from_config, URL
 from sqlalchemy import pool
+
+import config.db_table_config as tables
 
 env = Env()
 env.read_env(".env")

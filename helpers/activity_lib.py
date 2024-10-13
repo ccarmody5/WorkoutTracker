@@ -1,7 +1,8 @@
-import config.db_log_config as log_config
-from config.db_table_config import Activity, Workout
 from sqlalchemy import insert, select, func, update
 from sqlalchemy.orm import Session
+
+import config.db_log_config as log_config
+from config.db_table_config import Activity, Workout
 
 # from helpers.dbHelper import create_db_engine
 

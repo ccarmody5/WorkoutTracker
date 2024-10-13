@@ -1,7 +1,8 @@
-import config.db_log_config as log_config
-from config.db_table_config import User
 from sqlalchemy import insert, select, update, func
 from sqlalchemy.orm import Session
+
+import config.db_log_config as log_config
+from config.db_table_config import User
 
 logger = log_config.db_logger
 

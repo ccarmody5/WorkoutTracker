@@ -1,0 +1,4 @@
+/.env
+/logs/app.log
+/logs/db.log
+/logs/webapp.log
