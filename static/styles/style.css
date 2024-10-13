@@ -12,8 +12,17 @@ body {
 	padding: 5px;
 }
 
+/* Style the content for Index page*/
+.activityTitle{
+	text-align: center;
+	font-size: 45px;
+	font-weight: bold;
+	padding: 0px;
+}
+
 .contentHeader{
-	padding: 50px;
+    font-size: 20px;
+	padding: 25px;
 	font-weight: bold;
 }
 
@@ -39,7 +48,13 @@ position: absolute;
     justify-content: center; /* Align items horizontally centered */
     flex-wrap: wrap; /* Enable wrapping of items */
     gap: 10px; /* Optional: Add space between buttons */
-    padding: 50px; /* Optional: Add padding to the container */
+    padding: 10vh; /* Optional: Add padding to the container */
+    }
+
+.btnHomeContainer{
+    display: flex;
+    justify-content: center; /* Align items horizontally centered */
+    flex-wrap: wrap; /* Enable wrapping of items */
     }
 
 .btnActivity{
@@ -48,7 +63,7 @@ position: absolute;
     flex: 1 1 auto; /* Allow buttons to grow and shrink as necessary */
     width: 250px;
     max-width: 250px;
-    height: 100px;
+    height: 10vh; /* adjust with screen */
     background-color: #DADBDD;
 }
 

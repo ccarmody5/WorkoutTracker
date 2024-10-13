@@ -59,6 +59,7 @@ class Activity(Base, TableNameMixin, CreateUpdateMixin):
             'activity_desc': self.activity_desc
         }
 
+
 class Workout(Base, TableNameMixin, CreateUpdateMixin):
     workout_id: Mapped[int_pk]
     activity_id: Mapped[int] = mapped_column(Integer, ForeignKey('activity.activity_id'))
@@ -76,6 +77,7 @@ class Workout(Base, TableNameMixin, CreateUpdateMixin):
             'start_time': self.start_time,
             'end_time': self.end_time
         }
+
 
 class WorkoutDetail(Base, TableNameMixin, CreateUpdateMixin):
     workout_detail_id: Mapped[int_pk]

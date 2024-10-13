@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <title>Workout Tracker</title>
     <link href="/static/styles/style.css" rel="stylesheet"/>
-    <script src="static/scripts/index.js" type="text/javascript"></script>
+    <script src="static/scripts/workout-control.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -16,9 +16,12 @@
     <div class="contentTitle">Workout Tracker</div>
     <div class="contentHeader" id="currentTime"></div>
 </div>
-<div id="activity-buttons-container" class="btnActivityContainer">
-    <button class="btnActivity" onclick="window.location.href='/select-activity'">
-        Select Workout
+<!-- Content starts below -->
+<div id="activity-name-container"></div>
+<div id="control-button-container" class="btnActivityContainer"></div>
+<div id="control-button-container2" class="btnActivityContainer">
+    <button class="btnActivity" onclick="window.location.href='/'">
+        Home
     </button>
 </div>
 </body>
