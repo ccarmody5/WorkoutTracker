@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Workout Tracker</title>
+    <link href="/static/styles/style.css" rel="stylesheet"/>
+    <script src="static/scripts/user-edit.js" type="text/javascript"></script>
+</head>
+
+<body>
+<div>
+    <div class="contentHeader" id="currentUser"></div>
+    <div class="contentTitle">Workout Tracker</div>
+    <div class="contentHeader" id="currentTime"></div>
+</div>
+<!-- Content starts below -->
+<div id="name-action-container"></div>
+<div class="border inputContainer" id="data-input-section">
+    <div class="border " id="first-name-input-section">
+        <div class="border inputContainer" id="first-name-label">
+            <label class="border inputContainer inputText" for="firstNameInput">First Name:</label>
+        </div>
+        <div class="border inputContainer" id="first-name-input">
+            <input id="firstNameInput" name="firstNameInput" type="text"/>
+        </div>
+    </div>
+    <div class="border " id="last-name-input-section">
+        <div class="border inputContainer" id="last-name-label">
+            <label class="border inputContainer inputText" for="lastNameInput">Last Name:</label>
+        </div>
+        <div class="border inputContainer" id="last-name-input">
+            <input id="lastNameInput" name="lastNameInput" type="text"/>
+        </div>
+    </div>
+    <div class="border " id="disabled-section">
+        <div class="border inputContainer" id="disabled-label-cont">
+            <label class="border inputContainer inputText" for="disabledCheckbox">Disabled:</label>
+        </div>
+        <div class="border inputContainer" id="enabled-input-cont">
+            <input id="disabledCheckbox" name="disabledCheckbox" type="checkbox"/>
+        </div>
+    </div>
+</div>
+<div class="btnActivityContainer" id="control-button-container">
+    <button class="btnActivity" onclick="window.location.href='/manage-users'">
+        Cancel
+    </button>
+    <button class="btnActivity" onclick="save_user(document.getElementById('firstNameInput').value
+    ,document.getElementById('lastNameInput').value, document.getElementById('disabledCheckbox').checked)">
+        Save User
+    </button>
+</div>
+</body>
+
+</html>

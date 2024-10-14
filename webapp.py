@@ -99,6 +99,26 @@ def set_control():
 
     return render_template('set-control.html')
 
+'''
+' manage_users function
+'''
+
+@webapp.route('/manage-users')
+def manage_users():
+    logger.info(request.method)
+
+    return render_template('manage-users.html')
+
+'''
+' user_edit function
+'''
+
+@webapp.route('/user-edit')
+def user_edit():
+    logger.info(request.method)
+
+    return render_template('user-edit.html')
+
 ''' ***********************************************************************************************************************'''
 ''' *************************************************** FUNCTION CALLS ****************************************************'''
 ''' ***********************************************************************************************************************'''
@@ -124,12 +144,69 @@ def get_all_activities():
 def get_all_users():
     logger.info(request.method)
 
+    users = user_lib.UserLib(session=Session()).get_all_users(include_disabled='Y')
+
+    users_dict = [user.to_dict() for user in users]
+
+    return jsonify(users_dict)
+
+'''
+' get_enabled_users
+'''
+
+@webapp.route('/get_enabled_users', methods=['GET'])
+def get_enabled_users():
+    logger.info(request.method)
+
     users = user_lib.UserLib(session=Session()).get_all_users(include_disabled='N')
 
     users_dict = [user.to_dict() for user in users]
 
     return jsonify(users_dict)
 
+'''
+' update_user
+'''
+
+@webapp.route('/update_user', methods=['POST'])
+def update_user():
+    logger.info(request.method)
+
+    if request.method == 'POST':
+        data = request.json
+        logger.info(data)
+        print(data)
+        global current_user
+
+        if 'user_id' in data:
+            # Update User
+            user_id = data['user_id']
+            first_name = data['first_name']
+            last_name = data['last_name']
+            disabled = data['disabled']
+
+            user = user_lib.UserLib(session=Session()).update_user(user_id=user_id,
+                                                                   first_name=first_name,
+                                                                   last_name=last_name,
+                                                                   disabled=disabled,
+                                                                   updated_by=current_user.user_id)
+
+            logger.info(user.to_dict())
+            return jsonify({'status': 'success'})
+
+        else:
+            # Add User
+            first_name = data['first_name']
+            last_name = data['last_name']
+            disabled = data['disabled']
+
+            user_lib.UserLib(session=Session()).create_user(first_name=first_name,
+                                                            last_name=last_name,
+                                                            disabled=disabled,
+                                                            created_by=current_user.user_id,
+                                                            updated_by=current_user.user_id)
+            #logger.info(user.to_dict())
+            return jsonify({'status': 'success'})
 
 '''
 ' set_user

@@ -10,20 +10,23 @@ class UserLib:
     def __init__(self, session: Session = None):
         self.session = session
 
-    def create_user(self, first_name: str, last_name: str, created_by: int = -1, updated_by: int = -1):
+    def create_user(self, first_name: str, last_name: str, disabled: str = 'N', created_by: int = -1, updated_by: int = -1):
         logger.info(f"first_name: {first_name}, last_name: {last_name}")
 
         stmt = insert(User).values(
             first_name=first_name,
             last_name=last_name,
+            disabled=disabled,
             created_by=created_by,
             updated_by=updated_by
-        )
+        ).returning(User)
         logger.info(stmt)
 
         try:
-            self.session.execute(stmt)
+            result = self.session.execute(stmt)
             self.session.commit()
+            updated_user = result.scalar()
+            return updated_user
         except Exception as e:
             self.session.rollback()
             logger.error(e)
@@ -32,7 +35,7 @@ class UserLib:
 
     def update_user(self, user_id: int, first_name: str = None, last_name: str = None, disabled: str = 'N',
                     updated_by: int = -1):
-        logger.info(f"first_name: {first_name}, last_name: {last_name}, user_id: {user_id}, updated_by: {updated_by}")
+        logger.info(f"first_name: {first_name}, last_name: {last_name}, user_id: {user_id}, disabled: {disabled}, updated_by: {updated_by}")
 
         stmt = update(User).where(User.user_id == user_id)
 
@@ -48,13 +51,15 @@ class UserLib:
         if disabled:
             values_dict['disabled'] = disabled
 
-        stmt = stmt.values(**values_dict)
+        stmt = stmt.values(**values_dict).returning(User)
 
         logger.info(stmt)
 
         try:
-            self.session.execute(stmt)
+            result = self.session.execute(stmt)
             self.session.commit()
+            new_user = result.scalar()
+            return new_user
         except Exception as e:
             self.session.rollback()
             logger.error(e)
