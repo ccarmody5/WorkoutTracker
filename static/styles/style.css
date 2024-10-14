@@ -89,7 +89,12 @@ position: absolute;
 }
 
 .btnActivity:hover {
-  background-color: #04AA6D; /* Green */
+  background-color: #04AA6D;
+  color: white;
+}
+
+.btnActivity:focus {
+  background-color: #04AA6D;
   color: white;
 }
 

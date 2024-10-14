@@ -53,16 +53,18 @@ function load_page() {
 }
 
 function save_user(first_name, last_name, disabled) {
-    if(disabled == true) {
+    if (disabled == true) {
         disabled = 'Y';
     } else {
         disabled = 'N';
     }
 
-    const dataToSend = {user_id: user_data.user_id,
-                        first_name: first_name,
-                        last_name: last_name,
-                        disabled: disabled};
+    const dataToSend = {
+        user_id: user_data.user_id,
+        first_name: first_name,
+        last_name: last_name,
+        disabled: disabled
+    };
 
     fetch('/update_user', {
         method: 'POST',

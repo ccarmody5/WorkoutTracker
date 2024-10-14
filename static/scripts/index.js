@@ -4,6 +4,8 @@ var current_user;
 function init() {
     updateDateTime();
     get_current_user();
+
+    document.getElementById('workout-button').focus()
 }
 
 function updateDateTime() {

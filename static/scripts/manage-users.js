@@ -54,17 +54,19 @@ function get_users() {
 
 function select_user(user_id, first_name, last_name, disabled) {
 
-    if (user_id == null){
+    if (user_id == null) {
         action = 'add'
     } else {
         action = 'update'
     }
 
-    data = {action: action,
-            user_id: user_id,
-            first_name: first_name,
-            last_name: last_name,
-            disabled: disabled};
+    data = {
+        action: action,
+        user_id: user_id,
+        first_name: first_name,
+        last_name: last_name,
+        disabled: disabled
+    };
 
     localStorage.setItem('userData', JSON.stringify(data));
     window.location.href = '/user-edit';
