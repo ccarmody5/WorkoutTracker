@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from sqlalchemy import BIGINT, VARCHAR, func, ForeignKey, Integer
+import pytz
+from sqlalchemy import BIGINT, VARCHAR, ForeignKey, Integer
 from sqlalchemy import Float
 from sqlalchemy.dialects.postgresql import TIMESTAMP
 from sqlalchemy.orm import DeclarativeBase, Mapped, declared_attr
@@ -31,11 +32,16 @@ str_2000 = Annotated[str, mapped_column(VARCHAR(2000))]
 
 
 class CreateUpdateMixin:
+    @staticmethod
+    def get_local_time():
+        local_tz = pytz.timezone('America/Chicago')  # Replace with your local timezone
+        return datetime.now(local_tz).replace(tzinfo=None)
+
     creation_date: Mapped[datetime] = mapped_column(
-        TIMESTAMP, nullable=False, server_default=func.now()
+        TIMESTAMP(timezone=False), nullable=False, default=get_local_time
     )
     update_date: Mapped[datetime] = mapped_column(
-        TIMESTAMP, nullable=False, server_default=func.now(), onupdate=func.now()
+        TIMESTAMP(timezone=False), nullable=False, default=get_local_time, onupdate=get_local_time
     )
     created_by: Mapped[user_fk]
     updated_by: Mapped[user_fk]
@@ -75,8 +81,8 @@ class Workout(Base, TableNameMixin, CreateUpdateMixin):
             'workout_id': self.workout_id,
             'activity_id': self.activity_id,
             'user_id': self.user_id,
-            'start_time': self.start_time,
-            'end_time': self.end_time
+            'start_time': self.start_time.isoformat() if self.start_time else None,  # convert to ISO format
+            'end_time': self.end_time.isoformat() if self.end_time else None
         }
 
 
@@ -96,6 +102,6 @@ class WorkoutDetail(Base, TableNameMixin, CreateUpdateMixin):
             'workout_id': self.workout_id,
             'rep_count': self.rep_count,
             'weight': self.weight,
-            'start_time': self.start_time,
-            'end_time': self.end_time
+            'start_time': self.start_time.isoformat() if self.start_time else None,  # convert to ISO format
+            'end_time': self.end_time.isoformat() if self.end_time else None
         }

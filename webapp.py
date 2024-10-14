@@ -24,10 +24,12 @@ logger.info("\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX webapp.py has started XXXXXXXXXXXX
 '   Set-up Flask application
 '''
 webapp = Flask(__name__)
-
 webapp.config['SECRET_KEY'] = 'GDtfDCFYjD'
 webapp.config['ENV'] = 'dev'
 
+'''
+' Global Variables
+'''
 current_activity = Activity()
 current_workout = Workout()
 current_workout_detail = WorkoutDetail()
@@ -129,7 +131,6 @@ def set_activity():
             current_activity = activity_lib.ActivityLib(session=Session()).get_activity_by_desc(
                 activity_desc=activity)
 
-    # NEED TO CHANGE PAGES
     return jsonify({'status': 'success'})
 
 
@@ -143,7 +144,22 @@ def get_activity():
     logger.info(request.method)
 
     global current_activity
+
     return jsonify(current_activity.to_dict())
+
+
+'''
+' get_workout
+'''
+
+
+@webapp.route('/get_workout', methods=['GET'])
+def get_workout():
+    logger.info(request.method)
+
+    global current_workout
+
+    return jsonify(current_workout.to_dict())
 
 
 '''
@@ -156,6 +172,7 @@ def get_workout_detail():
     logger.info(request.method)
 
     global current_workout_detail
+
     return jsonify(current_workout_detail.to_dict())
 
 
@@ -176,14 +193,11 @@ def set_workout_status():
             reps = content['reps']
             weight = content['weight']
             complete_workout = content['completeWorkout']
-            print(reps + weight)
-
         global current_workout_detail
         global current_workout
         global continue_workout
 
         if command == 'start':
-            print('creating workout')
             if not continue_workout:
                 current_workout = workout_lib.WorkoutLib(session=Session()).create_workout(
                     activity_id=current_activity.activity_id,

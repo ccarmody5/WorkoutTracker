@@ -28,6 +28,15 @@ body {
     /*border: 2px solid #3498db;*/
 }
 
+.timerContainer{
+    font-size: 24px;
+    display: flex;
+    justify-content: center; /* Align items horizontally centered */
+    flex-wrap: wrap; /* Enable wrapping of items */
+    gap: 0vh; /* Optional: Add space between items */
+    padding: 1vh; /* Optional: Add padding to the container */
+    }
+
 .inputContainer{
     display: flex;
     justify-content: center; /* Align items horizontally centered */
