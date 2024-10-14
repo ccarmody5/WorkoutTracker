@@ -1,9 +1,11 @@
 window.onload = init;
 var workout_type;
+var current_user;
 
 function init() {
     updateDateTime();
-    getActivities()
+    getActivities();
+    get_current_user();
 }
 
 function updateDateTime() {
@@ -18,12 +20,11 @@ function updateDateTime() {
 setInterval(updateDateTime, 500);
 
 function getActivities() {
-    const container = document.getElementById('activity-buttons-container');
-    const homeContainer = document.getElementById('home-button-container');
     fetch('/get_all_activities')
         .then(response => response.json())
         .then(activities => {
             // Create the activity buttons dynamically
+            const container = document.getElementById('activity-buttons-container');
             activities.forEach(function (activity) {
                 const button = document.createElement("button");
                 button.textContent = activity.activity_desc;
@@ -34,6 +35,7 @@ function getActivities() {
             })
 
             // Create a Home button
+            const homeContainer = document.getElementById('home-button-container');
             const homeButton = document.createElement("button");
             homeButton.textContent = "Home";
             homeButton.id = "btn_home";
@@ -64,4 +66,14 @@ function select_workout(activity) {
         .catch((error) => {
             console.error('Error:', error);
         });
+}
+
+function get_current_user() {
+    fetch('/get_user')
+        .then(response => response.json())
+        .then(user => {
+            current_user = user.fullname
+            document.getElementById("currentUser").textContent = current_user;
+        })
+        .catch(error => console.error('Error:', error));
 }

@@ -1,10 +1,12 @@
 window.onload = init;
+var current_user;
 
 function init() {
     updateDateTime();
     get_workout_detail();
     get_activity();
     get_workout();
+    get_current_user();
 }
 
 var activity_status = "Stopped";
@@ -182,3 +184,13 @@ function updateSetTimer() {
 
 // Update the timer every second
 setInterval(updateSetTimer, refreshTimer);
+
+function get_current_user() {
+    fetch('/get_user')
+        .then(response => response.json())
+        .then(user => {
+            current_user = user.fullname
+            document.getElementById("currentUser").textContent = current_user;
+        })
+        .catch(error => console.error('Error:', error));
+}

@@ -9,15 +9,16 @@ body {
 	text-align: center;
 	font-size: 60px;
 	font-weight: bold;
-	padding: 5px;
+	padding: 0px;
 }
 
 /* Style the content for Index page*/
 .activityTitle{
 	text-align: center;
-	font-size: 45px;
+	font-size: 40px;
 	font-weight: bold;
 	padding: 0px;
+	color: #cfeccf;
 }
 
 .inputText{
@@ -72,12 +73,12 @@ position: absolute;
     }
 
 .btnActivity{
-    font-size: 30px;
+    font-size: 25px;
     border-radius: 12px;
     flex: 1 1 auto; /* Allow buttons to grow and shrink as necessary */
     width: 250px;
     max-width: 250px;
-    height: 10vh; /* adjust with screen */
+    height: 11vh; /* adjust with screen */
     background-color: #DADBDD;
 }
 

@@ -10,16 +10,27 @@
 
 <body>
 <div>
-    <div class="contentHeader" id="activeUser">
-        Active User: {{active_user}}
-    </div>
+    <div class="contentHeader" id="currentUser"></div>
     <div class="contentTitle">Workout Tracker</div>
     <div class="contentHeader" id="currentTime"></div>
 </div>
-<div class="btnActivityContainer" id="activity-buttons-container">
-    <button class="btnActivity" onclick="window.location.href='/select-activity'">
-        Select Workout
-    </button>
+<!-- Content starts below -->
+<div>
+    <p class="activityTitle">Menu</p>
+</div>
+<div class="border btnActivityContainer" id="activity-buttons-container">
+    <div class="border">
+        <div id="1" class="border inputContainer">
+            <button class="btnActivity" onclick="window.location.href='/select-activity'">
+                Select Workout
+            </button>
+        </div>
+        <div id="2" class="border inputContainer">
+            <button class="btnActivity" onclick="change_user()">
+                Change User
+            </button>
+        </div>
+    </div>
 </div>
 </body>
 

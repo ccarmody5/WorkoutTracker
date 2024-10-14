@@ -1,8 +1,10 @@
 window.onload = init;
+var current_user;
 
 function init() {
     updateDateTime();
-    get_activity()
+    get_activity();
+    get_current_user();
 }
 
 var activity_status = "Stopped"
@@ -97,5 +99,14 @@ function complete_set(completeWorkout, repsInput, weightInput) {
     }).catch((error) => {
         console.error('Error:', error);
     });
+}
 
+function get_current_user() {
+    fetch('/get_user')
+        .then(response => response.json())
+        .then(user => {
+            current_user = user.fullname
+            document.getElementById("currentUser").textContent = current_user;
+        })
+        .catch(error => console.error('Error:', error));
 }

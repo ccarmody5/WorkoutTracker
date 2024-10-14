@@ -14,7 +14,8 @@ import helpers.activity_lib as activity_lib
 import helpers.dbHelper as dbHelper
 import helpers.workout_detail_lib as workout_detail_lib
 import helpers.workout_lib as workout_lib
-from config.db_table_config import Activity, Workout, WorkoutDetail
+from config.db_table_config import Activity, Workout, WorkoutDetail, User
+from helpers import user_lib
 
 logger = log_config.webapp_logger
 
@@ -34,6 +35,7 @@ current_activity = Activity()
 current_workout = Workout()
 current_workout_detail = WorkoutDetail()
 continue_workout = False
+current_user = User()
 
 '''
 ' Start DB Engine
@@ -52,7 +54,20 @@ Session = sessionmaker(bind=engine)
 @webapp.route('/')
 def index():
     logger.info(request.method)
-    return render_template('index.html')
+    if current_user.user_id:
+        return render_template('index.html')
+    else:
+        return render_template('login.html')
+
+'''
+' login function
+'''
+
+@webapp.route('/login')
+def login():
+    logger.info(request.method)
+
+    return render_template('login.html')
 
 '''
 ' select-activity function
@@ -100,6 +115,59 @@ def get_all_activities():
     activities_dict = [activity.to_dict() for activity in activities]
 
     return jsonify(activities_dict)
+
+'''
+' get_all_users
+'''
+
+@webapp.route('/get_all_users', methods=['GET'])
+def get_all_users():
+    logger.info(request.method)
+
+    users = user_lib.UserLib(session=Session()).get_all_users(include_disabled='N')
+
+    users_dict = [user.to_dict() for user in users]
+
+    return jsonify(users_dict)
+
+
+'''
+' set_user
+'''
+
+@webapp.route('/set_user', methods=['POST'])
+def set_user():
+    logger.info(request.method)
+    global current_user
+
+    if request.method == 'POST':
+        process = request.json
+        logger.info(process)
+
+        if 'user_id' in process:
+            user_id = process['user_id']
+
+            if user_id is None:
+                current_user = User()
+                logger.info('Change User')
+            else:
+                current_user = user_lib.UserLib(session=Session()).get_pk(
+                    user_id=user_id)
+                logger.info(current_user.to_dict())
+
+            return jsonify({'status': 'success'})
+
+'''
+' get_user
+'''
+
+@webapp.route('/get_user', methods=['GET'])
+def get_user():
+    logger.info(request.method)
+
+    global current_user
+
+    return jsonify(current_user.to_dict())
 
 '''
 ' set_workout
@@ -182,15 +250,15 @@ def set_workout_status():
             if not continue_workout:
                 current_workout = workout_lib.WorkoutLib(session=Session()).create_workout(
                     activity_id=current_activity.activity_id,
-                    user_id=1, created_by=1, updated_by=1)
+                    user_id=current_user.user_id, created_by=current_user.user_id, updated_by=current_user.user_id)
             current_workout_detail = workout_detail_lib.WorkoutDetailLib(session=Session()).create_workout_detail(
-                workout_id=current_workout.workout_id, created_by=1, updated_by=1
+                workout_id=current_workout.workout_id, created_by=current_user.user_id, updated_by=current_user.user_id
             )
             return jsonify(current_workout_detail.to_dict())
 
         elif command == 'stop':
             current_workout_detail = workout_detail_lib.WorkoutDetailLib(session=Session()).stop_workout_detail(
-                workout_detail_id=current_workout_detail.workout_detail_id, updated_by=1)
+                workout_detail_id=current_workout_detail.workout_detail_id, updated_by=current_user.user_id)
             return jsonify(current_workout_detail.to_dict())
 
         elif command == 'complete':
@@ -198,7 +266,7 @@ def set_workout_status():
                 workout_detail_id=current_workout_detail.workout_detail_id,
                 rep_count=reps,
                 weight=weight,
-                updated_by=1
+                updated_by=current_user.user_id
             )
 
             current_workout_detail = WorkoutDetail()
@@ -207,7 +275,7 @@ def set_workout_status():
                 continue_workout = True
             else:
                 current_workout = workout_lib.WorkoutLib(session=Session()).complete_workout(
-                    workout_id=current_workout.workout_id, updated_by=1)
+                    workout_id=current_workout.workout_id, updated_by=current_user.user_id)
                 continue_workout = False
                 current_workout = Workout()
 

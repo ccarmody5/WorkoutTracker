@@ -48,6 +48,15 @@ class User(Base, TableNameMixin, CreateUpdateMixin):
     last_name: Mapped[str_2000]
     disabled: Mapped[str] = mapped_column(VARCHAR(1), server_default='N')
 
+    def to_dict(self):
+        return {
+            'user_id': self.user_id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'disabled': self.disabled,
+            'fullname': self.first_name + ' ' + self.last_name
+        }
+
 class Activity(Base, TableNameMixin, CreateUpdateMixin):
     activity_id: Mapped[int_pk]
     activity_desc: Mapped[str_2000]
