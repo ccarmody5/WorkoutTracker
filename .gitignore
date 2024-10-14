@@ -2,3 +2,5 @@
 /logs/app.log
 /logs/db.log
 /logs/webapp.log
+/templates/template.html
+/static/scripts/template.js
