@@ -2,28 +2,30 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>Workout Tracker</title>
-    <link href="/static/styles/style.css" rel="stylesheet"/>
+    <link href="/static/styles/style.css" rel="stylesheet" />
     <script src="static/scripts/workout-control.js" type="text/javascript"></script>
 </head>
 
 <body>
-<div>
-    <div class="contentHeader" id="activeUser">
-        Active User: {{active_user}}
+    <div>
+        <div class="contentHeader" id="activeUser">
+            Active User: {{active_user}}
+        </div>
+        <div class="contentTitle">Workout Tracker</div>
+        <div class="contentHeader" id="currentTime"></div>
     </div>
-    <div class="contentTitle">Workout Tracker</div>
-    <div class="contentHeader" id="currentTime"></div>
-</div>
-<!-- Content starts below -->
-<div id="activity-name-container"></div>
-<div id="control-button-container" class="btnActivityContainer"></div>
-<div id="control-button-container2" class="btnActivityContainer">
-    <button class="btnActivity" onclick="window.location.href='/'">
-        Home
-    </button>
-</div>
+    <!-- Content starts below -->
+    <div id="activity-name-container"></div>
+    <div id="control-button-container" class="btnActivityContainer"></div>
+    <!-- REMOVE HOME BUTTON AT SOME POINT -->
+    <div id="control-button-container2" class="btnActivityContainer">
+        <button class="btnActivity" onclick="window.location.href='/'">
+            Home
+        </button>
+    </div>
+    <!-- REMOVE HOME BUTTON AT SOME POINT -->
 </body>
 
 </html>

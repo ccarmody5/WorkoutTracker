@@ -24,15 +24,15 @@ class WorkoutLib:
             start_time=datetime.now(),
             created_by=created_by,
             updated_by=updated_by
-        ).returning(Workout.workout_id)
+        ).returning(Workout)
 
         logger.info(stmt)
 
         try:
             result = self.session.execute(stmt)
             self.session.commit()
-            new_workout_id = result.scalar()
-            return new_workout_id
+            new_workout = result.scalar()
+            return new_workout
         except Exception as e:
             self.session.rollback()
             logger.error(e)

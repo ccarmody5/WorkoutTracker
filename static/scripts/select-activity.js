@@ -23,8 +23,6 @@ function getActivities() {
     fetch('/get_all_activities')
         .then(response => response.json())
         .then(activities => {
-            console.log(activities);
-
             // Create the activity buttons dynamically
             activities.forEach(function (activity) {
                 const button = document.createElement("button");
@@ -52,7 +50,7 @@ function select_workout(activity) {
     console.log(activity)
     const dataToSend = { activity: activity };
 
-    fetch('/set_workout', {
+    fetch('/set_activity', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -61,47 +59,9 @@ function select_workout(activity) {
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
-            // Redirect to homepage after successful data sending
             window.location.href = '/workout-control';
         })
         .catch((error) => {
             console.error('Error:', error);
         });
 }
-
-/*
-        function performActivity(activity) {
-            fetch('http://127.0.0.1:5000/perform_activity', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ activity: activity })
-            }).catch(error => console.error('Error:', error));
-        }
-*/
-
-/**
- *  EXAMPLE TO SEND DATA BACK TO PYTHON
- *                                  button.onclick = function () {
-                    const dataToSend = { activity: activity.activity_desc };
-
-                    fetch('/select_workout', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(dataToSend)
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log('Success:', data);
-                            // Redirect to homepage after successful data sending
-                            window.location.href = '/';
-                        })
-                        .catch((error) => {
-                            console.error('Error:', error);
-                        });
-                }
- */
