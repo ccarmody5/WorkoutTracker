@@ -56,7 +56,8 @@ class Activity(Base, TableNameMixin, CreateUpdateMixin):
     def to_dict(self):
         return {
             'activity_id': self.activity_id,
-            'activity_desc': self.activity_desc
+            'activity_desc': self.activity_desc,
+            'disabled': self.disabled
         }
 
 
