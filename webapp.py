@@ -11,9 +11,9 @@ from sqlalchemy.orm import sessionmaker
 
 import config.webapp_log_config as log_config
 import helpers.activity_lib as activity_lib
-import helpers.workout_lib as workout_lib
-import helpers.workout_detail_lib as workout_detail_lib
 import helpers.dbHelper as dbHelper
+import helpers.workout_detail_lib as workout_detail_lib
+import helpers.workout_lib as workout_lib
 from config.db_table_config import Activity, Workout, WorkoutDetail
 
 logger = log_config.webapp_logger
@@ -89,6 +89,7 @@ def set_control():
 
     return render_template('set-control.html')
 
+
 ''' ***********************************************************************************************************************'''
 ''' *************************************************** FUNCTION CALLS ****************************************************'''
 ''' ***********************************************************************************************************************'''
@@ -127,7 +128,6 @@ def set_activity():
             global current_activity
             current_activity = activity_lib.ActivityLib(session=Session()).get_activity_by_desc(
                 activity_desc=activity)
-
 
     # NEED TO CHANGE PAGES
     return jsonify({'status': 'success'})
@@ -185,8 +185,9 @@ def set_workout_status():
         if command == 'start':
             print('creating workout')
             if not continue_workout:
-                current_workout = workout_lib.WorkoutLib(session=Session()).create_workout(activity_id=current_activity.activity_id,
-                                                                                   user_id=1,created_by=1,updated_by=1)
+                current_workout = workout_lib.WorkoutLib(session=Session()).create_workout(
+                    activity_id=current_activity.activity_id,
+                    user_id=1, created_by=1, updated_by=1)
             current_workout_detail = workout_detail_lib.WorkoutDetailLib(session=Session()).create_workout_detail(
                 workout_id=current_workout.workout_id, created_by=1, updated_by=1
             )
@@ -194,7 +195,7 @@ def set_workout_status():
 
         elif command == 'stop':
             current_workout_detail = workout_detail_lib.WorkoutDetailLib(session=Session()).stop_workout_detail(
-                workout_detail_id=current_workout_detail.workout_detail_id,updated_by=1)
+                workout_detail_id=current_workout_detail.workout_detail_id, updated_by=1)
             return jsonify(current_workout_detail.to_dict())
 
         elif command == 'complete':
@@ -211,12 +212,11 @@ def set_workout_status():
                 continue_workout = True
             else:
                 current_workout = workout_lib.WorkoutLib(session=Session()).complete_workout(
-                    workout_id=current_workout.workout_id,updated_by=1)
+                    workout_id=current_workout.workout_id, updated_by=1)
                 continue_workout = False
                 current_workout = Workout()
 
             return jsonify(current_workout_detail.to_dict())
-
 
 
 if __name__ == '__main__':

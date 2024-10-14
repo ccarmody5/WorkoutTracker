@@ -2,66 +2,66 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Workout Tracker</title>
-    <link href="/static/styles/style.css" rel="stylesheet" />
+    <link href="/static/styles/style.css" rel="stylesheet"/>
     <script src="static/scripts/set-control.js" type="text/javascript"></script>
 </head>
 
 <body>
-    <div>
-        <div class="contentHeader" id="activeUser">
-            Active User: {{active_user}}
-        </div>
-        <div class="contentTitle">Workout Tracker</div>
-        <div class="contentHeader" id="currentTime"></div>
+<div>
+    <div class="contentHeader" id="activeUser">
+        Active User: {{active_user}}
     </div>
-    <!-- Content starts below -->
-    <div id="activity-name-container"></div>
-    <div id="data-input-section" class="border inputContainer">
-        <div id="reps-input-section" class="border ">
-            <div id="reps-count-label" class="border inputContainer">
-                <label for="repsInput" class="border inputContainer inputText">Number of Reps:</label>
-            </div>
-            <div id="reps-count-input" class="border inputContainer">
-                <input type="number" id="repsInput" name="repsInput" min="0" max="500" value="0">
-            </div>
-            <div id="reps-button-section" class="border inputContainer">
-                <button class="btnActivity" onclick="decreaseReps()">
-                    -
-                </button>
-                <button class="btnActivity" onclick="increaseReps()">
-                    +
-                </button>
-            </div>
+    <div class="contentTitle">Workout Tracker</div>
+    <div class="contentHeader" id="currentTime"></div>
+</div>
+<!-- Content starts below -->
+<div id="activity-name-container"></div>
+<div class="border inputContainer" id="data-input-section">
+    <div class="border " id="reps-input-section">
+        <div class="border inputContainer" id="reps-count-label">
+            <label class="border inputContainer inputText" for="repsInput">Number of Reps:</label>
         </div>
-        <div id="weight-input-section" class="border ">
-            <div id="weight-input-label" class="border inputContainer">
-                <label for="weightInput" class="border inputContainer inputText">Amount of Weight:</label>
-            </div>
-            <div id="weight-count-input" class="border inputContainer">
-                <input type="number" id="weightInput" name="weightInput" min="0" max="500" value="0">
-            </div>
-            <div id="weight-button-section" class="border inputContainer">
-                <button class="btnActivity" onclick="decreaseWeight()">
-                    -
-                </button>
-                <button class="btnActivity" onclick="increaseWeight()">
-                    +
-                </button>
-            </div>
+        <div class="border inputContainer" id="reps-count-input">
+            <input id="repsInput" max="500" min="0" name="repsInput" type="number" value="0">
+        </div>
+        <div class="border inputContainer" id="reps-button-section">
+            <button class="btnActivity" onclick="decreaseReps()">
+                -
+            </button>
+            <button class="btnActivity" onclick="increaseReps()">
+                +
+            </button>
         </div>
     </div>
-    <div id="control-button-container" class="btnActivityContainer">
-        <button class="btnActivity" onclick="complete_set('N', document.getElementById('repsInput').value
+    <div class="border " id="weight-input-section">
+        <div class="border inputContainer" id="weight-input-label">
+            <label class="border inputContainer inputText" for="weightInput">Amount of Weight:</label>
+        </div>
+        <div class="border inputContainer" id="weight-count-input">
+            <input id="weightInput" max="500" min="0" name="weightInput" type="number" value="0">
+        </div>
+        <div class="border inputContainer" id="weight-button-section">
+            <button class="btnActivity" onclick="decreaseWeight()">
+                -
+            </button>
+            <button class="btnActivity" onclick="increaseWeight()">
+                +
+            </button>
+        </div>
+    </div>
+</div>
+<div class="btnActivityContainer" id="control-button-container">
+    <button class="btnActivity" onclick="complete_set('N', document.getElementById('repsInput').value
     ,document.getElementById('weightInput').value)">
-            New Set
-        </button>
-        <button class="btnActivity" onclick="complete_set('Y', document.getElementById('repsInput').value
+        New Set
+    </button>
+    <button class="btnActivity" onclick="complete_set('Y', document.getElementById('repsInput').value
     ,document.getElementById('weightInput').value)">
-            New Workout
-        </button>
-    </div>
+        New Workout
+    </button>
+</div>
 </body>
 
 </html>
