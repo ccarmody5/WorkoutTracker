@@ -10,7 +10,6 @@ from config.db_table_config import Activity, Workout
 
 logger = log_config.db_logger
 
-
 class ActivityLib:
     def __init__(self, session: Session = None):
         self.session = session

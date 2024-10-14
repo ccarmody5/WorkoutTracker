@@ -19,7 +19,6 @@ logger.info("\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX dbHelper.py has started XXXXXXXXXX
 env = Env()
 env.read_env(".env")
 
-
 def create_db_engine():
     logger.info('creating db engine')
     url = URL.create(
@@ -40,7 +39,6 @@ def create_db_engine():
     except Exception as e:
         logger.error(e)
         exit_program(e)
-
 
 def exit_program(e):
     print(f"Exiting due to error: {e}")

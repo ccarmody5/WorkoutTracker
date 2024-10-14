@@ -8,17 +8,14 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, declared_attr
 from sqlalchemy.testing.schema import mapped_column
 from typing_extensions import Annotated
 
-
 class Base(DeclarativeBase):
     pass
-
 
 class TableNameMixin:
     # Take the Class name and use it for the table name
     @declared_attr.directive
     def __tablename__(cls) -> str:
         return cls.__name__.lower()
-
 
 int_pk = Annotated[int,
 mapped_column(Integer, primary_key=True, autoincrement=True)
@@ -29,7 +26,6 @@ mapped_column(BIGINT, ForeignKey('user.user_id', ondelete='SET NULL'))
 ]
 
 str_2000 = Annotated[str, mapped_column(VARCHAR(2000))]
-
 
 class CreateUpdateMixin:
     @staticmethod
@@ -46,13 +42,11 @@ class CreateUpdateMixin:
     created_by: Mapped[user_fk]
     updated_by: Mapped[user_fk]
 
-
 class User(Base, TableNameMixin, CreateUpdateMixin):
     user_id: Mapped[int_pk]
     first_name: Mapped[str_2000]
     last_name: Mapped[str_2000]
     disabled: Mapped[str] = mapped_column(VARCHAR(1), server_default='N')
-
 
 class Activity(Base, TableNameMixin, CreateUpdateMixin):
     activity_id: Mapped[int_pk]
@@ -65,7 +59,6 @@ class Activity(Base, TableNameMixin, CreateUpdateMixin):
             'activity_desc': self.activity_desc,
             'disabled': self.disabled
         }
-
 
 class Workout(Base, TableNameMixin, CreateUpdateMixin):
     workout_id: Mapped[int_pk]
@@ -84,7 +77,6 @@ class Workout(Base, TableNameMixin, CreateUpdateMixin):
             'start_time': self.start_time.isoformat() if self.start_time else None,  # convert to ISO format
             'end_time': self.end_time.isoformat() if self.end_time else None
         }
-
 
 class WorkoutDetail(Base, TableNameMixin, CreateUpdateMixin):
     workout_detail_id: Mapped[int_pk]

@@ -49,17 +49,14 @@ Session = sessionmaker(bind=engine)
 ' index function
 '''
 
-
 @webapp.route('/')
 def index():
     logger.info(request.method)
     return render_template('index.html')
 
-
 '''
 ' select-activity function
 '''
-
 
 @webapp.route('/select-activity')
 def select_activity():
@@ -67,11 +64,9 @@ def select_activity():
 
     return render_template('select-activity.html')
 
-
 '''
 ' workout-control function
 '''
-
 
 @webapp.route('/workout-control')
 def workout_control():
@@ -79,11 +74,9 @@ def workout_control():
 
     return render_template('workout-control.html')
 
-
 '''
 ' set-control function
 '''
-
 
 @webapp.route('/set-control')
 def set_control():
@@ -91,14 +84,12 @@ def set_control():
 
     return render_template('set-control.html')
 
-
 ''' ***********************************************************************************************************************'''
 ''' *************************************************** FUNCTION CALLS ****************************************************'''
 ''' ***********************************************************************************************************************'''
 '''
 ' get_all_activities
 '''
-
 
 @webapp.route('/get_all_activities', methods=['GET'])
 def get_all_activities():
@@ -110,11 +101,9 @@ def get_all_activities():
 
     return jsonify(activities_dict)
 
-
 '''
 ' set_workout
 '''
-
 
 @webapp.route('/set_activity', methods=['POST'])
 def set_activity():
@@ -133,11 +122,9 @@ def set_activity():
 
     return jsonify({'status': 'success'})
 
-
 '''
 ' get_activity
 '''
-
 
 @webapp.route('/get_activity', methods=['GET'])
 def get_activity():
@@ -147,11 +134,9 @@ def get_activity():
 
     return jsonify(current_activity.to_dict())
 
-
 '''
 ' get_workout
 '''
-
 
 @webapp.route('/get_workout', methods=['GET'])
 def get_workout():
@@ -161,11 +146,9 @@ def get_workout():
 
     return jsonify(current_workout.to_dict())
 
-
 '''
 ' get_workout_detail
 '''
-
 
 @webapp.route('/get_workout_detail', methods=['GET'])
 def get_workout_detail():
@@ -175,11 +158,9 @@ def get_workout_detail():
 
     return jsonify(current_workout_detail.to_dict())
 
-
 '''
 ' set_workout_status
 '''
-
 
 @webapp.route('/set_workout_status', methods=['POST'])
 def set_workout_status():
@@ -231,7 +212,6 @@ def set_workout_status():
                 current_workout = Workout()
 
             return jsonify(current_workout_detail.to_dict())
-
 
 if __name__ == '__main__':
     webapp.run(debug=True, host='0.0.0.0')

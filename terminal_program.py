@@ -28,7 +28,6 @@ Session = sessionmaker(bind=engine)
 
 active_user = 0
 
-
 def get_activity():
     logger.info("")
     activity_list = activity_lib.ActivityLib(session=Session()).get_all_activities(include_disabled='N')
@@ -67,7 +66,6 @@ def get_activity():
 
     return activity_entered
 
-
 def get_reps(workout_detail_id):
     logger.info(f"workout_detail_id: {workout_detail_id}")
     print(f"Enter number of reps:")
@@ -80,7 +78,6 @@ def get_reps(workout_detail_id):
 
     logger.info(f"{reps_entered} reps were entered")
     get_weight(workout_detail_id=workout_detail_id, reps=reps_entered)
-
 
 def get_weight(workout_detail_id, reps):
     logger.info(f"workout_detail_id: {workout_detail_id}, reps: {reps}")
@@ -125,7 +122,6 @@ def get_weight(workout_detail_id, reps):
             workout_id=workout_detail.workout_id, created_by=active_user, updated_by=active_user)
         get_reps(workout_detail_id=workout_detail_id)
 
-
 def get_activities_menu():
     menu_list = ["1 - Add Activity",
                  "2 - Update Activity",
@@ -154,7 +150,6 @@ def get_activities_menu():
     else:
         print("Invalid menu choice")
 
-
 def add_activity():
     logger.info("")
     activity_list = activity_lib.ActivityLib(session=Session()).get_all_activities(include_disabled='Y')
@@ -174,7 +169,6 @@ def add_activity():
     activity_lib.ActivityLib(session=Session()).create_activity(activity_desc=activity_desc, created_by=active_user
                                                                 , updated_by=active_user)
 
-
 def update_activity(activity_id: int, activity_desc: str = None, disabled: str = None):
     logger.info(f"activity_id: {activity_id}, activity_desc: {activity_desc}, disabled: {disabled}")
     if activity_desc:
@@ -184,7 +178,6 @@ def update_activity(activity_id: int, activity_desc: str = None, disabled: str =
     elif disabled:
         activity_lib.ActivityLib(session=Session()).update_activity(activity_id=activity_id, disabled=disabled,
                                                                     updated_by=active_user)
-
 
 def manage_activities():
     activity_list = activity_lib.ActivityLib(session=Session()).get_all_activities(include_disabled='Y')
@@ -221,7 +214,6 @@ def manage_activities():
     else:
         print("Invalid menu choice")
 
-
 def get_user_menu():
     menu_list = ["1 - Add User",
                  "2 - Update User",
@@ -251,7 +243,6 @@ def get_user_menu():
     else:
         print("Invalid menu choice")
 
-
 def add_user():
     logger.info("")
     user_list = user_lib.UserLib(session=Session()).get_all_users()
@@ -272,7 +263,6 @@ def add_user():
 
     user_lib.UserLib(session=Session()).create_user(first_name=first_name, last_name=last_name, created_by=active_user
                                                     , updated_by=active_user)
-
 
 def manage_users():
     user_list = user_lib.UserLib(session=Session()).get_all_users(include_disabled='Y')
@@ -311,7 +301,6 @@ def manage_users():
     else:
         print("Invalid menu choice")
 
-
 def update_user(user_id: int, first_name: str = None, last_name: str = None, disabled: str = None):
     logger.info(f"user_id: {user_id}, first_name: {first_name}, last_name: {last_name}, disabled: {disabled}")
     if first_name:
@@ -319,7 +308,6 @@ def update_user(user_id: int, first_name: str = None, last_name: str = None, dis
                                                         updated_by=active_user)
     elif disabled:
         user_lib.UserLib(session=Session()).update_user(user_id=user_id, disabled=disabled, updated_by=active_user)
-
 
 def login():
     user_list = user_lib.UserLib(session=Session()).get_all_users(include_disabled='Y')
@@ -343,11 +331,9 @@ def login():
     global active_user
     active_user = int(user_selected)
 
-
 def logout():
     global active_user
     active_user = 0
-
 
 def get_menu():
     if active_user == 0:
@@ -386,13 +372,11 @@ def get_menu():
     else:
         print("Invalid menu choice")
 
-
 def main():
     logger.info("In main loop")
 
     while True:
         get_menu()
-
 
 # Call main()
 __name__ == '__main__' and main()

@@ -131,7 +131,7 @@ function updateWorkoutTimer() {
 
     //console.log(workout_start_time)
 
-    if (workout_start_time !== null){
+    if (workout_start_time !== null) {
         var now = new Date();
         var difference = now - workout_start_time;
 
@@ -142,9 +142,9 @@ function updateWorkoutTimer() {
 
         // Ensure double digits for minutes and seconds
         var timeString = timeString +
-                         (hours < 10 ? '0' : '') + hours + ":" +
-                         (minutes < 10 ? '0' : '') + minutes + ":" +
-                         (seconds < 10 ? '0' : '') + seconds;
+            (hours < 10 ? '0' : '') + hours + ":" +
+            (minutes < 10 ? '0' : '') + minutes + ":" +
+            (seconds < 10 ? '0' : '') + seconds;
     } else {
         timeString = timeString + " Resting"
     }
@@ -159,7 +159,7 @@ setInterval(updateWorkoutTimer, refreshTimer);
 function updateSetTimer() {
     var timeString = "Set Time: "
 
-    if (activity_status == "Running"){
+    if (activity_status == "Running") {
         var now = new Date();
         var difference = now - set_start_time;
 
@@ -170,9 +170,9 @@ function updateSetTimer() {
 
         // Ensure double digits for minutes and seconds
         timeString = timeString +
-                         (hours < 10 ? '0' : '') + hours + ":" +
-                         (minutes < 10 ? '0' : '') + minutes + ":" +
-                         (seconds < 10 ? '0' : '') + seconds;
+            (hours < 10 ? '0' : '') + hours + ":" +
+            (minutes < 10 ? '0' : '') + minutes + ":" +
+            (seconds < 10 ? '0' : '') + seconds;
     } else {
         timeString = timeString + " Resting"
     }

@@ -11,11 +11,9 @@ APP_LOG_FORMAT = ("%(asctime)s - %(module)-10s %(funcName)-16s %(lineno)-4s %(le
 
 LOG_LEVEL = logging.INFO
 
-
 def get_logs_directory_path():
     """Return the absolute path to the Logs directory in the parent directory."""
     return os.path.abspath(os.path.join(os.curdir, "logs"))
-
 
 # Usage
 logs_directory = get_logs_directory_path()

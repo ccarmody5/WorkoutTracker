@@ -12,11 +12,9 @@ WEBAPP_LOG_FORMAT = (
 
 LOG_LEVEL = logging.INFO
 
-
 def get_logs_directory_path():
     """Return the absolute path to the Logs directory in the parent directory."""
     return os.path.abspath(os.path.join(os.curdir, "logs"))
-
 
 # Usage
 logs_directory = get_logs_directory_path()
