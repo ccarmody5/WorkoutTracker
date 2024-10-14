@@ -6,7 +6,7 @@
   </component>
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -35,6 +35,9 @@
     </filter-actions>
     <filter-actions connection-id="b082cf3d-6483-49d6-a4dd-09063d9c817f" dataset="public.workout" active-filter-id="fc778228-ef27-4ba6-aa5b-43edb54c3d98">
       <filter id="fc778228-ef27-4ba6-aa5b-43edb54c3d98" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
+    <filter-actions connection-id="b082cf3d-6483-49d6-a4dd-09063d9c817f" dataset="public.workoutdetail" active-filter-id="b5dd51df-3c22-4172-a04f-3fa1a4573dc9">
+      <filter id="b5dd51df-3c22-4172-a04f-3fa1a4573dc9" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>
     <filter-actions connection-id="b082cf3d-6483-49d6-a4dd-09063d9c817f" dataset="public.user" active-filter-id="fe01f34b-5a7c-46bc-9d14-95c94491c9f0">
       <filter id="fe01f34b-5a7c-46bc-9d14-95c94491c9f0" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
