@@ -17,7 +17,7 @@ function updateDateTime() {
 setInterval(updateDateTime, 500);
 
 function get_users() {
-    fetch('/get_all_users')
+    fetch('/get_enabled_users')
         .then(response => response.json())
         .then(users => {
             // Create the activity buttons dynamically
