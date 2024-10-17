@@ -18,19 +18,24 @@
 <div>
     <p class="activityTitle">Menu</p>
 </div>
-<div class="border btnActivityContainer" id="activity-buttons-container">
+<div class="border btnHomeContainer" id="activity-buttons-container">
     <div class="border">
-        <div id="workout_button_container" class="border inputContainer">
-            <button id="workout-button" class="btnActivity" onclick="window.location.href='/select-activity'">
+        <div class="border inputContainer" id="workout_button_container">
+            <button class="btnActivity" id="workout-button" onclick="window.location.href='/select-activity'">
                 Select Workout
             </button>
         </div>
-        <div id="manage_user_button_container" class="border inputContainer">
+        <div class="border inputContainer" id="manage_act_btn_container">
+            <button class="btnActivity" onclick="window.location.href='/manage-activities'">
+                Manage Activities
+            </button>
+        </div>
+        <div class="border inputContainer" id="manage_user_btn_container">
             <button class="btnActivity" onclick="window.location.href='/manage-users'">
                 Manage Users
             </button>
         </div>
-        <div id="change_user_button_container" class="border inputContainer">
+        <div class="border inputContainer" id="change_user_button_container">
             <button class="btnActivity" onclick="change_user()">
                 Change User
             </button>

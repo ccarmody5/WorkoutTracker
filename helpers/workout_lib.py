@@ -13,7 +13,7 @@ class WorkoutLib:
         self.session = session
 
     def create_workout(self, activity_id: Activity.activity_id, user_id: User.user_id, created_by: int = -1,
-                       updated_by: int = -1):
+                       updated_by: int = -1) -> Workout:
         logger.info(
             f"activity_id: {activity_id}, user_id: {user_id}, created_by: {created_by}, updated_by: {updated_by}")
 

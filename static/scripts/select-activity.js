@@ -11,7 +11,7 @@ function init() {
 function updateDateTime() {
     // create a new `Date` object
     const now = new Date();
-    const currentDateTime = now.toLocaleString();
+    const currentDateTime = now.toLocaleTimeString();
 
     document.querySelector('#currentTime').textContent = currentDateTime;
 }
@@ -20,7 +20,7 @@ function updateDateTime() {
 setInterval(updateDateTime, 500);
 
 function getActivities() {
-    fetch('/get_all_activities')
+    fetch('/get_enabled_activities')
         .then(response => response.json())
         .then(activities => {
             // Create the activity buttons dynamically

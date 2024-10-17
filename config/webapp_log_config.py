@@ -8,7 +8,7 @@ from logging import FileHandler
 from logging import Formatter
 
 WEBAPP_LOG_FORMAT = (
-        "%(asctime)s - %(module)-10s %(funcName)-20s %(lineno)-4s %(levelname)-7s " + ' -- ' + '%(message)s')
+        "%(asctime)s - %(module)-10s %(funcName)-23s %(lineno)-4s %(levelname)-7s " + ' -- ' + '%(message)s')
 
 LOG_LEVEL = logging.INFO
 

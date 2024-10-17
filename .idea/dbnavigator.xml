@@ -36,6 +36,9 @@
     <filter-actions connection-id="b082cf3d-6483-49d6-a4dd-09063d9c817f" dataset="public.workout" active-filter-id="fc778228-ef27-4ba6-aa5b-43edb54c3d98">
       <filter id="fc778228-ef27-4ba6-aa5b-43edb54c3d98" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>
+    <filter-actions connection-id="b082cf3d-6483-49d6-a4dd-09063d9c817f" dataset="public.activity" active-filter-id="acf8372b-84c9-4263-8a92-9ed818775881">
+      <filter id="acf8372b-84c9-4263-8a92-9ed818775881" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
     <filter-actions connection-id="b082cf3d-6483-49d6-a4dd-09063d9c817f" dataset="public.workoutdetail" active-filter-id="b5dd51df-3c22-4172-a04f-3fa1a4573dc9">
       <filter id="b5dd51df-3c22-4172-a04f-3fa1a4573dc9" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>

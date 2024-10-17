@@ -14,50 +14,59 @@ class ActivityLib:
     def __init__(self, session: Session = None):
         self.session = session
 
-    def create_activity(self, activity_desc: str, created_by: int = -1, updated_by: int = -1):
-        logger.info(f"activity_desc: {activity_desc}, created_by: {created_by}, updated_by: {updated_by}")
+    def create_activity(self, activity_desc: str, disabled='N', activity_type: str = None, default_weight: float = None,
+                        created_by: int = -1, updated_by: int = -1):
+        logger.info(f"activity_desc: {activity_desc}, activity_type: {activity_type}, default_weight: {default_weight} "
+                    f"created_by: {created_by}, updated_by: {updated_by}")
 
         stmt = insert(Activity).values(
             activity_desc=activity_desc,
+            disabled=disabled,
+            activity_type=activity_type,
+            default_weight=default_weight,
             created_by=created_by,
             updated_by=updated_by
-        )
+        ).returning(Activity)
 
         logger.info(stmt)
 
         try:
-            self.session.execute(stmt)
+            result = self.session.execute(stmt)
             self.session.commit()
+            new_activity = result.scalar()
+            return new_activity
         except Exception as e:
             self.session.rollback()
             logger.error(e)
         finally:
             self.session.close()
 
-    def update_activity(self, activity_id: int, activity_desc: str = None, disabled: str = None, updated_by: int = -1):
+    def update_activity(self, activity_id: int, activity_desc: str = None, disabled: str = None,
+                        activity_type: str = None, default_weight: float = None, updated_by: int = -1):
         logger.info(
-            f"activity_id: {activity_id}, activity_desc: {activity_desc}, disabled: {disabled}, updated_by: {updated_by}")
+            f"activity_id: {activity_id}, activity_desc: {activity_desc}, activity_type: {activity_type}, "
+            f"default_weight: {default_weight},disabled: {disabled}, updated_by: {updated_by}")
 
         stmt = update(Activity).where(Activity.activity_id == activity_id)
 
         values_dict = {
+            'activity_desc': activity_desc,
+            'activity_type': activity_type,
+            'default_weight': default_weight,
+            'disabled': disabled,
             'updated_by': updated_by,
             'update_date': func.now()
         }
 
-        if activity_desc:
-            values_dict['activity_desc'] = activity_desc
-
-        if disabled:
-            values_dict['disabled'] = disabled
-
-        stmt = stmt.values(**values_dict)
+        stmt = stmt.values(**values_dict).returning(Activity)
 
         logger.info(stmt)
 
         try:
-            self.session.execute(stmt)
+            result = self.session.execute(stmt)
             self.session.commit()
+            new_activity = result.scalar()
+            return new_activity
         except Exception as e:
             self.session.rollback()
             logger.error(e)

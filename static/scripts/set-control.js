@@ -12,7 +12,7 @@ var activity_status = "Stopped"
 function updateDateTime() {
     // create a new `Date` object
     const now = new Date();
-    const currentDateTime = now.toLocaleString();
+    const currentDateTime = now.toLocaleTimeString();
 
     document.querySelector('#currentTime').textContent = currentDateTime;
 }
@@ -20,7 +20,7 @@ function updateDateTime() {
 // call the `updateDateTime` function every second
 setInterval(updateDateTime, 500);
 
-function loadPage() {
+function loadPage(activity) {
     if (activity_status == "Stopped") {
         textContent = "Start Set"
     } else {
@@ -33,6 +33,23 @@ function loadPage() {
     activityNameText.textContent = "Workout: " + current_activity;
     activityNameText.className = "activityTitle";
     activityNameCont.appendChild(activityNameText);
+
+    // Load default weight
+    const weightInput = document.getElementById('weightInput');
+    weightInput.value = activity.default_weight;
+
+    // Only show the weight input options if the activity_type = strength
+    const weightInputContainer = document.getElementById('weight-input-container');
+    const bodyWeightContainer = document.getElementById('body-weight-container');
+
+    if (activity.activity_type !== 'strength') {
+        weightInputContainer.classList.add('hidden');
+        bodyWeightContainer.classList.remove('hidden');
+    } else {
+        weightInputContainer.classList.remove('hidden');
+        bodyWeightContainer.classList.add('hidden');
+    }
+
 }
 
 function get_activity() {
@@ -40,7 +57,7 @@ function get_activity() {
         .then(response => response.json())
         .then(activity => {
             current_activity = activity.activity_desc
-            loadPage()
+            loadPage(activity)
         })
         .catch(error => console.error('Error:', error));
 }

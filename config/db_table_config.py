@@ -61,12 +61,16 @@ class Activity(Base, TableNameMixin, CreateUpdateMixin):
     activity_id: Mapped[int_pk]
     activity_desc: Mapped[str_2000]
     disabled: Mapped[str] = mapped_column(VARCHAR(1), server_default='N')
+    activity_type: Mapped[str] = mapped_column(VARCHAR(50))
+    default_weight: Mapped[int] = mapped_column(Integer, nullable=True, server_default='0')
 
     def to_dict(self):
         return {
             'activity_id': self.activity_id,
             'activity_desc': self.activity_desc,
-            'disabled': self.disabled
+            'disabled': self.disabled,
+            'activity_type': self.activity_type,
+            'default_weight': self.default_weight
         }
 
 class Workout(Base, TableNameMixin, CreateUpdateMixin):

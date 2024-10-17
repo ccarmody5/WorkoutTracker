@@ -13,7 +13,7 @@ class WorkoutDetailLib:
         self.session = session
 
     def create_workout_detail(self, workout_id: int, rep_count: str = None, weight: float = None,
-                              created_by: int = -1, updated_by: int = -1):
+                              created_by: int = -1, updated_by: int = -1) -> WorkoutDetail:
         logger.info(
             f"workout_id: {workout_id}, rep_count: {rep_count}, weight: {weight}, created_by: {created_by}, updated_by: {updated_by}")
 

@@ -18,7 +18,7 @@ var refreshTimer = 100;
 function updateDateTime() {
     // create a new `Date` object
     const now = new Date();
-    const currentDateTime = now.toLocaleString();
+    const currentDateTime = now.toLocaleTimeString();
 
     document.querySelector('#currentTime').textContent = currentDateTime;
 }
@@ -48,6 +48,7 @@ function loadPage() {
     controlButton.className = "btnActivity";
     controlButton.onclick = () => control_workout(textContent);
     controlContainer.appendChild(controlButton);
+
 }
 
 function get_activity() {
@@ -114,13 +115,20 @@ function get_workout_detail() {
 }
 
 function get_workout() {
-    console.log('get_workout')
     fetch('/get_workout')
         .then(response => response.json())
         .then(workout => {
-            console.log(workout)
             if (workout.workout_id !== null) {
                 workout_start_time = new Date(workout.start_time);
+            } else {
+                // Create the start or stop button dynamically
+                const controlContainer = document.getElementById('control-button-container');
+                const controlButton = document.createElement("button");
+                controlButton.textContent = "Back";
+                controlButton.id = "btn_start_stop";
+                controlButton.className = "btnActivity";
+                controlButton.onclick = () => {window.location.href = '/select-activity';};
+                controlContainer.appendChild(controlButton);
             }
 
         })

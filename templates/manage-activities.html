@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <title>Workout Tracker</title>
     <link href="/static/styles/style.css" rel="stylesheet"/>
-    <script src="static/scripts/manage-users.js" type="text/javascript"></script>
+    <script src="static/scripts/manage-activities.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -16,12 +16,12 @@
 </div>
 <!-- Content starts below -->
 <div>
-    <p class="activityTitle">Select user to edit</p>
+    <p class="activityTitle">Select activity to edit</p>
 </div>
-<div class="btnActivityContainer" id="user-buttons-container"></div>
+<div class="btnActivityContainer" id="activities-buttons-container"></div>
 <div class="btnHomeContainer" id="add-button-container">
-    <button class="btnActivity" onclick="select_user()">
-        Add User
+    <button class="btnActivity" onclick="select_activity()">
+        Add Activity
     </button>
     <button class="btnActivity" onclick="window.location.href='/'">
         Home

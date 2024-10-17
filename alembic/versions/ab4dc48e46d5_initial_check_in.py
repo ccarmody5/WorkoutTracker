@@ -1,8 +1,8 @@
-"""Initial Checkin
+"""initial check in
 
-Revision ID: bc599acc85fa
+Revision ID: ab4dc48e46d5
 Revises: 
-Create Date: 2024-10-14 09:55:23.346864
+Create Date: 2024-10-16 16:38:49.521329
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ from alembic import op
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision: str = 'bc599acc85fa'
+revision: str = 'ab4dc48e46d5'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -36,6 +36,8 @@ def upgrade() -> None:
                     sa.Column('activity_id', sa.Integer(), autoincrement=True, nullable=False),
                     sa.Column('activity_desc', sa.VARCHAR(length=2000), nullable=False),
                     sa.Column('disabled', sa.VARCHAR(length=1), server_default='N', nullable=False),
+                    sa.Column('activity_type', sa.VARCHAR(length=50), nullable=False),
+                    sa.Column('default_weight', sa.Integer(), server_default='0', nullable=True),
                     sa.Column('creation_date', postgresql.TIMESTAMP(), nullable=False),
                     sa.Column('update_date', postgresql.TIMESTAMP(), nullable=False),
                     sa.Column('created_by', sa.BIGINT(), nullable=False),

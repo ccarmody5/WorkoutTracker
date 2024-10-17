@@ -8,7 +8,7 @@ function init() {
 function updateDateTime() {
     // create a new `Date` object
     const now = new Date();
-    const currentDateTime = now.toLocaleString();
+    const currentDateTime = now.toLocaleTimeString();
 
     document.querySelector('#currentTime').textContent = currentDateTime;
 }

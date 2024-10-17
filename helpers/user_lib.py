@@ -10,7 +10,8 @@ class UserLib:
     def __init__(self, session: Session = None):
         self.session = session
 
-    def create_user(self, first_name: str, last_name: str, disabled: str = 'N', created_by: int = -1, updated_by: int = -1):
+    def create_user(self, first_name: str, last_name: str, disabled: str = 'N', created_by: int = -1,
+                    updated_by: int = -1):
         logger.info(f"first_name: {first_name}, last_name: {last_name}")
 
         stmt = insert(User).values(
@@ -35,7 +36,8 @@ class UserLib:
 
     def update_user(self, user_id: int, first_name: str = None, last_name: str = None, disabled: str = 'N',
                     updated_by: int = -1):
-        logger.info(f"first_name: {first_name}, last_name: {last_name}, user_id: {user_id}, disabled: {disabled}, updated_by: {updated_by}")
+        logger.info(
+            f"first_name: {first_name}, last_name: {last_name}, user_id: {user_id}, disabled: {disabled}, updated_by: {updated_by}")
 
         stmt = update(User).where(User.user_id == user_id)
 

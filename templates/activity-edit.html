@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Workout Tracker</title>
+    <link href="/static/styles/style.css" rel="stylesheet"/>
+    <script src="static/scripts/activity-edit.js" type="text/javascript"></script>
+</head>
+
+<body>
+<div>
+    <div class="contentHeader" id="currentUser"></div>
+    <div class="contentTitle">Workout Tracker</div>
+    <div class="contentHeader" id="currentTime"></div>
+</div>
+<!-- Content starts below -->
+<div id="name-action-container"></div>
+<div class="border inputContainer" id="data-input-section">
+    <!-- Activity Description -->
+    <div class="border " id="activity-input-section">
+        <div class="border inputContainer" id="activity-desc-label">
+            <label class="border inputContainer inputText" for="activityDescInput">Activity Description:</label>
+        </div>
+        <div class="border inputContainer" id="activity-desc-input">
+            <input id="activityDescInput" name="activityDescInput" type="text"/>
+        </div>
+    </div>
+    <!-- Activity Type -->
+    <div class="border " id="type-section">
+        <div class="border inputContainer" id="type-label-cont">
+            <label class="border inputContainer inputText" for="activityTypeOptions">Activity Type:</label>
+        </div>
+        <div class="inputContainer">
+            <select class="border inputText" id="activityTypeOptions" name="activityTypeOptions">
+                <option value="strength">Strength</option>
+                <option value="cardio">Cardio</option>
+                <option value="body_weight">Body Weight</option>
+            </select>
+        </div>
+    </div>
+    <!-- Default Weight -->
+    <div class="border " id="weight-input-section">
+        <div class="border inputContainer" id="default-weight-label">
+            <label class="border inputContainer inputText" for="defaultWeightInput">Default Weight:</label>
+            <!-- if activityTypeOptions != strength then disable -->
+        </div>
+        <div class="border inputContainer" id="default-weight-input">
+            <input id="defaultWeightInput" max="500" min="0" name="defaultWeightInput" type="number" value="0">
+        </div>
+        <div id="default-weight-buttons">
+            <div class="border inputContainer" id="default-button-section">
+                <button class="btnActivity btnIncrement" id="default-increase-btn" onclick="decreaseWeight()">
+                    -
+                </button>
+                <button class="btnActivity btnIncrement" id="default-decrease-btn" onclick="increaseWeight()">
+                    +
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Disabled Checkbox-->
+    <div class="border " id="disabled-section">
+        <div class="border inputContainer" id="disabled-label-cont">
+            <label class="border inputContainer inputText" for="disabledCheckbox">Disabled:</label>
+        </div>
+        <div class="border inputContainer" id="enabled-input-cont">
+            <input id="disabledCheckbox" name="disabledCheckbox" type="checkbox"/>
+        </div>
+    </div>
+</div>
+<div class="btnActivityContainer" id="control-button-container">
+    <button class="btnActivity" onclick="window.location.href='/manage-activities'">
+        Cancel
+    </button>
+    <button class="btnActivity" onclick="save_activity()"> <!-- detail how to get the inputs -->
+        Save Activity
+    </button>
+</div>
+</body>
+
+</html>

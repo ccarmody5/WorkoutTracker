@@ -25,10 +25,10 @@
             <input id="repsInput" max="500" min="0" name="repsInput" type="number" value="0">
         </div>
         <div class="border inputContainer" id="reps-button-section">
-            <button class="btnActivity" onclick="decreaseReps()">
+            <button class="btnActivity btnIncrement" onclick="decreaseReps()">
                 -
             </button>
-            <button class="btnActivity" onclick="increaseReps()">
+            <button class="btnActivity btnIncrement" onclick="increaseReps()">
                 +
             </button>
         </div>
@@ -37,16 +37,21 @@
         <div class="border inputContainer" id="weight-input-label">
             <label class="border inputContainer inputText" for="weightInput">Amount of Weight:</label>
         </div>
-        <div class="border inputContainer" id="weight-count-input">
-            <input id="weightInput" max="500" min="0" name="weightInput" type="number" value="0">
+        <div id="weight-input-container"> <!-- if parameter == true then hide this div -->
+            <div class="border inputContainer" id="weight-count-input">
+                <input id="weightInput" max="500" min="0" name="weightInput" type="number" value="0">
+            </div>
+            <div class="border inputContainer" id="weight-button-section">
+                <button class="btnActivity btnIncrement" onclick="decreaseWeight()">
+                    -
+                </button>
+                <button class="btnActivity btnIncrement" onclick="increaseWeight()">
+                    +
+                </button>
+            </div>
         </div>
-        <div class="border inputContainer" id="weight-button-section">
-            <button class="btnActivity" onclick="decreaseWeight()">
-                -
-            </button>
-            <button class="btnActivity" onclick="increaseWeight()">
-                +
-            </button>
+        <div id="body-weight-container">
+            <label class="border inputContainer inputText" for="weightInput">Body-Weight</label>
         </div>
     </div>
 </div>

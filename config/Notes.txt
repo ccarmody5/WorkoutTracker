@@ -11,3 +11,12 @@ Alembic
     - alembic upgrade head
 * Downgrade
     - alembic downgrade -1
+
+******************************** Upgrades ********************************
+Add View Activities screen
+    a. view by user
+    b. view by Activity
+
+Set-up on Raspberry Pi
+    a. set-up in a docker container
+        i. https://markofthelam.com/blog/docker-rpi/
