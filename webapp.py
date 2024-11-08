@@ -452,5 +452,33 @@ def set_workout_status():
 
             return jsonify(current_workout_detail.to_dict())
 
+@webapp.route('/test1', methods=['POST'])
+def test1():
+    logger.info(request.method)
+    print('test')
+
+    workouts = workout_lib.WorkoutLib(session=Session()).get_user_workouts(user_id=2)
+
+    if workouts:
+        for workout, user, activity in workouts:
+            print(f"user: {user.first_name} {user.last_name} workout: {activity.activity_desc} / {workout.workout_id}")
+
+    return jsonify({'status': 'success'})
+
+@webapp.route('/test', methods=['POST'])
+def test():
+    logger.info(request.method)
+
+    #workouts = workout_lib.WorkoutLib(session=Session()).get_user_workouts(user_id=2)
+    workout_details = workout_detail_lib.WorkoutDetailLib(session=Session()).get_workout_details(workout_id = 25)
+
+    if workout_details:
+        for workout, user, activity, workout_detail in workout_details:
+            print(f"{user.first_name} {user.last_name}; workout: {activity.activity_desc} / {workout.workout_id} "
+                  f"Reps: {workout_detail.rep_count}")
+
+    return jsonify({'status': 'success'})
+
+
 if __name__ == '__main__':
     webapp.run(debug=True, host='0.0.0.0')

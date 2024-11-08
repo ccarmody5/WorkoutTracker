@@ -80,3 +80,17 @@ class WorkoutLib:
             logger.error(e)
         finally:
             self.session.close()
+
+    def get_user_workouts(self, user_id: int):
+        logger.info(f"getting all user workouts for user_id {user_id}")
+
+        stmt = select(Workout, User, Activity).select_from(Workout).join(User, User.user_id == Workout.user_id).join(
+            Activity, Activity.activity_id == Workout.activity_id).where(User.user_id == user_id)
+        try:
+            result = self.session.execute(stmt).all()
+            return result
+        except Exception as e:
+            logger.error(e)
+            print(e)
+        finally:
+            self.session.close()

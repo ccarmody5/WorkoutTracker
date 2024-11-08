@@ -47,3 +47,22 @@ function change_user() {
             console.error('Error:', error);
         });
 }
+
+function test() {
+    console.log("test");
+
+    const dataToSend = { command: "start" };
+
+    fetch('/test', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dataToSend)
+    }).then(() => {
+        //window.location.href = '/';
+        console.log('done');
+    }).catch((error) => {
+        console.error('Error:', error);
+    });
+}

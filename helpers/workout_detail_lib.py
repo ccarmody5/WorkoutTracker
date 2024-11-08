@@ -4,7 +4,7 @@ from sqlalchemy import insert, select, update
 from sqlalchemy.orm import Session
 
 import config.db_log_config as log_config
-from config.db_table_config import WorkoutDetail
+from config.db_table_config import WorkoutDetail, Workout, User, Activity
 
 logger = log_config.db_logger
 
@@ -95,5 +95,26 @@ class WorkoutDetailLib:
             return result
         except Exception as e:
             logger.error(e)
+        finally:
+            self.session.close()
+
+    def get_workout_details(self, workout_id: int):
+        logger.info(f"getting workout details for workout_id {workout_id}")
+        '''
+        stmt = select(Workout, User, Activity).select_from(Workout).join(User, User.user_id == Workout.user_id).join(
+            Activity, Activity.activity_id == Workout.activity_id).where(User.user_id == user_id)
+        '''
+        stmt = select(Workout, User, Activity, WorkoutDetail).select_from(WorkoutDetail).join(
+            Workout, Workout.workout_id == WorkoutDetail.workout_id).join(
+            Activity, Activity.activity_id == Workout.activity_id).join(
+            User, User.user_id == Workout.user_id
+        ).where(Workout.workout_id == workout_id)
+
+        try:
+            result = self.session.execute(stmt).all()
+            return result
+        except Exception as e:
+            logger.error(e)
+            print(e)
         finally:
             self.session.close()
