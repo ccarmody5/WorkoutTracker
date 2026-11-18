@@ -28,7 +28,7 @@ url = URL.create(
 ).render_as_string(hide_password=False)
 
 # Setup URL string
-config.set_main_option('sqlalchemy.url', url)
+config.set_main_option('sqlalchemy.url', url.replace('%', '%%'))
 
 # add your model's MetaData object here
 target_metadata = tables.Base.metadata
