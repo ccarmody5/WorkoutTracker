@@ -26,6 +26,11 @@
                 Select Workout
             </button>
         </div>
+        <form class="border inputContainer" action="{{ url_for('manage_activities') }}" method="get">
+            <button class="btnActivity" type="submit">
+                Manage Activities
+            </button>
+        </form>
         <div id="manage_user_button_container" class="border inputContainer">
             <button class="btnActivity" onclick="window.location.href='/manage-users'">
                 Manage Users

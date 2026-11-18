@@ -6,7 +6,7 @@
 ' Flask Server Set-up
 '
 """
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from sqlalchemy.orm import sessionmaker
 
 import config.webapp_log_config as log_config
@@ -119,6 +119,42 @@ def manage_users():
     logger.info(request.method)
 
     return render_template('manage-users.html')
+
+
+@webapp.route('/manage-activities', methods=['GET', 'POST'])
+def manage_activities():
+    if not current_user.user_id:
+        return redirect(url_for('index'))
+
+    activity_manager = activity_lib.ActivityLib(session=Session())
+    error = None
+    status = 200
+    if request.method == 'POST':
+        description = request.form.get('activity_desc', '').strip()
+        activity_id = request.form.get('activity_id', type=int)
+        if not description or len(description) > 2000:
+            error = 'Enter an activity name between 1 and 2,000 characters.'
+            status = 400
+        elif 'activity_id' in request.form and (activity_id is None or activity_id < 1):
+            error = 'Select a valid activity.'
+            status = 400
+        else:
+            user_id = current_user.user_id
+            if activity_id is None:
+                saved = activity_manager.create_activity(description, created_by=user_id, updated_by=user_id)
+            else:
+                disabled = 'Y' if 'disabled' in request.form else 'N'
+                saved = activity_manager.update_activity(activity_id, description, disabled, updated_by=user_id)
+            if saved:
+                return redirect(url_for('manage_activities'), code=303)
+            error = 'Could not save the activity.'
+            status = 400
+
+    activities = activity_manager.get_all_activities(include_disabled='Y')
+    if activities is None:
+        error = 'Could not load activities.'
+        status = 503
+    return render_template('manage-activities.html', activities=activities, error=error), status
 
 '''
 ' user_edit function

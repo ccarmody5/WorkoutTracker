@@ -28,9 +28,11 @@ class ActivityLib:
         try:
             self.session.execute(stmt)
             self.session.commit()
+            return True
         except Exception as e:
             self.session.rollback()
             logger.error(e)
+            return False
         finally:
             self.session.close()
 
@@ -56,11 +58,13 @@ class ActivityLib:
         logger.info(stmt)
 
         try:
-            self.session.execute(stmt)
+            result = self.session.execute(stmt)
             self.session.commit()
+            return result.rowcount > 0
         except Exception as e:
             self.session.rollback()
             logger.error(e)
+            return False
         finally:
             self.session.close()
 

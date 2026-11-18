@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Manage Activities | Workout Tracker</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <div class="contentTitle">Workout Tracker</div>
+    <h1 class="activityTitle">Manage Activities</h1>
+</header>
+<main class="releaseHistory">
+    <a href="{{ url_for('index') }}">Home</a>
+    {% if error %}<p role="alert">{{ error }}</p>{% endif %}
+    {% if activities is not none %}
+        <h2>Add Activity</h2>
+        <form method="post" class="activityEditor">
+            <label>Activity name <input type="text" name="activity_desc" maxlength="2000" required/></label>
+            <button type="submit">Add Activity</button>
+        </form>
+        <h2>Existing Activities</h2>
+        {% for activity in activities %}
+            <form method="post" class="activityEditor">
+                <input type="hidden" name="activity_id" value="{{ activity.activity_id }}"/>
+                <label>Activity name <input type="text" name="activity_desc" value="{{ activity.activity_desc }}" maxlength="2000" required/></label>
+                <label><input type="checkbox" name="disabled"{% if activity.disabled == 'Y' %} checked{% endif %}/> Disabled</label>
+                <button type="submit">Save</button>
+            </form>
+        {% else %}
+            <p>No activities yet.</p>
+        {% endfor %}
+    {% endif %}
+</main>
+</body>
+</html>

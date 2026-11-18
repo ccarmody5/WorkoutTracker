@@ -2,6 +2,24 @@
 
 REVISIONS = [
     {
+        'version': '1.1.1',
+        'date': '2026-11-18',
+        'title': 'Manage Activities navigation fix',
+        'changes': [
+            'The Manage Activities button opens the activity editor without inline JavaScript.',
+            'Restart the application to load this update.',
+        ],
+    },
+    {
+        'version': '1.1.0',
+        'date': '2026-11-18',
+        'title': 'Manage workout activities',
+        'changes': [
+            'Use Manage Activities in the home menu to add, rename, enable, or disable activities.',
+            'Restart the application to load this update.',
+        ],
+    },
+    {
         'version': '1.0.1',
         'date': '2026-11-18',
         'title': 'Version in the page header',
