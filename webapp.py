@@ -14,6 +14,7 @@ import helpers.activity_lib as activity_lib
 import helpers.dbHelper as dbHelper
 import helpers.workout_detail_lib as workout_detail_lib
 import helpers.workout_lib as workout_lib
+from config.app_revision import APP_REVISION, REVISIONS
 from config.db_table_config import Activity, Workout, WorkoutDetail, User
 from helpers import user_lib
 
@@ -27,6 +28,11 @@ logger.info("\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX webapp.py has started XXXXXXXXXXXX
 webapp = Flask(__name__)
 webapp.config['SECRET_KEY'] = 'GDtfDCFYjD'
 webapp.config['ENV'] = 'dev'
+
+
+@webapp.context_processor
+def inject_app_revision():
+    return {'app_revision': APP_REVISION, 'app_revisions': REVISIONS}
 
 '''
 ' Global Variables
@@ -58,6 +64,11 @@ def index():
         return render_template('index.html')
     else:
         return render_template('login.html')
+
+@webapp.route('/about')
+def about():
+    return render_template('about.html')
+
 
 '''
 ' login function

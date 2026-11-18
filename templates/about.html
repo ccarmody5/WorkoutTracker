@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>About Workout Tracker</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet"/>
+</head>
+<body>
+<main class="releaseHistory">
+    <a href="{{ url_for('index') }}">Home</a>
+    <h1>About Workout Tracker</h1>
+    {% macro release_notes(release) %}
+    <article>
+        <h3>{{ release.version }} · {{ release.title }}</h3>
+        <time datetime="{{ release.date }}">{{ release.date }}</time>
+        <ul>
+            {% for change in release.changes %}
+            <li>{{ change }}</li>
+            {% endfor %}
+        </ul>
+    </article>
+    {% endmacro %}
+    <section aria-labelledby="latest-release">
+        <h2 id="latest-release">Latest release</h2>
+        {{ release_notes(app_revisions[0]) }}
+    </section>
+    {% if app_revisions|length > 1 %}
+    <section aria-labelledby="previous-releases">
+        <h2 id="previous-releases">Previous releases</h2>
+        {% for release in app_revisions[1:] %}
+        {{ release_notes(release) }}
+        {% endfor %}
+    </section>
+    {% endif %}
+</main>
+</body>
+</html>
